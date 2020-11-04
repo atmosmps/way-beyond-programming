@@ -13,9 +13,28 @@ Dica: s.replace(stra, strb) retorna uma versão da string s
 onde todas as instancias de stra foram substituidas por strb.
 """
 
+
+def replace_occurrence(sentence: str = None, occurrence: str = None, target: str = None):
+    if (sentence or occurrence or target) is None:
+        return None
+
+    sentence_list = []
+    sentence_list[:0] = sentence
+
+    for index, value in enumerate(sentence_list):
+        if value == occurrence:
+            sentence_list[index] = target
+
+    result = ''.join(sentence_list)
+    return result
+
+
 def fix_start(s):
-    # +++ SUA SOLUÇÃO +++
-    return
+    # Solution 1
+    # return s[0] + s.replace(s[0], "*")[1:]
+
+    # Solution 2
+    return s[0] + replace_occurrence(s, s[0], '*')[1:]
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
