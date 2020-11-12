@@ -9,10 +9,40 @@ por 'good' e retorne a string resultante.
 Exemplo: 'The dinner is not that bad!' retorna 'The dinner is good!'
 """
 
-def not_bad(s):
-    # +++ SUA SOLUÇÃO +++
-    return
 
+def find_position(string: str, word: str):
+    for i in range(len(string) - len(word) + 1):
+        if string[i:i + len(word)] == word:
+            return i
+
+    raise ValueError
+
+
+def not_bad(s):
+    """
+    REGULAR EXPRESSIONS RECOMMENDED
+
+    Other Cases
+
+    - not not bad
+    - not bad not bad
+    - bad not bad
+    """
+
+    find_position(s, 'not')
+
+    # Solution 1
+    to_replace = 'good'
+
+    if not (('not' in s) and ('bad' in s)):
+        return s
+
+    if s.index('bad') < s.index('not'):
+        return s
+
+    if s.index('bad') > s.index('not'):
+        pattern = s[s.index('not'):s.index('bad') + len('not')]
+        return s.replace(pattern, to_replace)
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
