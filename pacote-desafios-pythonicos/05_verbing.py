@@ -10,10 +10,22 @@ Se o tamanho da string for menor que 3, não altere nada.
 Retorne o resultado da string.
 """
 
-def verbing(s):
-    # +++ SUA SOLUÇÃO +++
-    return
 
+def verbing(s):
+    # Solution 1
+    present_continuous = 'ing'
+    adverbs_manner = 'ly'
+
+    if len(s) < 3:
+        return s
+
+    if len(s) >= 3:
+        result = s + present_continuous
+
+        if (s[-3:]) == present_continuous:
+            result = s + adverbs_manner
+
+        return result
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
