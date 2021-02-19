@@ -8,10 +8,22 @@ e o último caracteres da cadeia são os mesmos.
 PS: Python não possui o operador ++, porém += funciona.
 """
 
-def match_ends(words):
-    # +++ SUA SOLUÇÃO +++
-    return
 
+def match_ends(words):
+    # Generator Expressions - https://www.geeksforgeeks.org/generator-expressions/
+    # https://dbader.org/blog/python-generator-expressions
+    # https://www.programiz.com/python-programming/generator
+
+    # Solution 0
+    # result = []
+    # for word in words:
+    #     if (len(word) >= 2) and (word[-1:] == word[:1]):
+    #
+    # return len(result)
+
+    # Solution 1
+    result = []
+    return len([result.append(word) for word in words if (len(word) >= 2) and (word[-1:] == word[:1])])
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
