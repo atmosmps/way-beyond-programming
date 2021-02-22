@@ -23,13 +23,15 @@
 
 - [X] Aulas in Live
 - [X] Começe por aqui
+- [X] Aula Inaugural
 - [X] Apaixone-se pelo Python
     - Domine o Poder do Python
-        - [Python Power](wttd-training/python-power)
+        - [Python Power](wttd-training/fall-in-love-with-python/python-power)
     - Você sabe Kung Fu? Mostre-me
-        - [Pacotes de desafios Pythônicos](wttd-training/pacote-desafios-pythonicos)
+        - [Pacotes de desafios Pythônicos](wttd-training/fall-in-love-with-python/package-challenge-pythonic)
     - A máquina e reconhecer padrões
-        - [Raio X das Expressões Regulares](wttd-training/x-ray-of-regular-expressions.md)
+        - [Raio X das Expressões Regulares](wttd-training/fall-in-love-with-python/x-ray-of-regular-expressions.md)
     - Python Orientado a Objetos
-        - [Raio X da Orientação à Objetos](wttd-training/object-oriented-python.md)
+        - [Raio X da Orientação à Objetos](wttd-training/fall-in-love-with-python/object-oriented-python.md)
 - [ ] Pronto é quando está no ar!
+    - [BONUS: Raio X do Django](wttd-training/ready-is-when-its-on-the-air/django-x-ray.md)
