@@ -17,9 +17,6 @@ FIZZ = 'fizz'
 BUZZ = 'buzz'
 FIZZBUZZ = 'fizzbuzz'
 
-# def multiple_of(base: int, num: int):
-#     return num % base == 0
-
 
 multiple_of = lambda base, num: num % base == 0
 
