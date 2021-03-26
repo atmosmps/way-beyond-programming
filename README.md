@@ -33,5 +33,6 @@
         - [Raio X das Expressões Regulares](wttd-training/fall-in-love-with-python/x-ray-of-regular-expressions.md)
     - Python Orientado a Objetos
         - [Raio X da Orientação à Objetos](wttd-training/fall-in-love-with-python/object-oriented-python.md)
-- [ ] Pronto é quando está no ar!
+- [X] Pronto é quando está no ar!
     - [BONUS: Raio X do Django](wttd-training/ready-is-when-its-on-the-air/django-x-ray.md)
+- [] Desenvolvimento Ágil
