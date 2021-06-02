@@ -1,3 +1,4 @@
+from django.core import mail
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
 
@@ -51,3 +52,30 @@ class SubscribeTest(TestCase):
         )
 
 
+class SubscriptionTest(TestCase):
+
+    def setUp(self) -> None:
+        data = dict(
+            name="Atmos Maciel", cpf="12345678901",
+            email="atmos@email.com", phone="12-91234-5678"
+        )
+
+        self.response = self.client.post('/inscricao/', data=data)
+
+    def test_post_action(self):
+        self.assertEqual(302, self.response.status_code)
+
+    def test_should_subscribe_email(self):
+        self.assertEqual(1, len(mail.outbox))
+
+    def test_should_sent_email_with_subscription_email_subject(self):
+        email = mail.outbox[0]
+        expected = 'Confirmação de Inscrição'
+
+        self.assertEqual(expected, email.subject)
+
+    def test_should_sent_email_with_subscription_email_from(self):
+        email = mail.outbox[0]
+        expected = 'contato@eventex.com'
+
+        self.assertEqual(expected, email.from_email)
