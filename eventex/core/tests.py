@@ -11,3 +11,6 @@ class HomeTest(TestCase):
 
     def test_should_return_the_used_template_in_home_page(self):
         self.assertTemplateUsed(self.response, 'index.html')
+
+    def test_home_shold_contain_a_subscription_link(self):
+        self.assertContains(self.response, 'href="/inscricao/"')
