@@ -1,9 +1,15 @@
 from django.core import mail
 from django.test import TestCase
+
 from eventex.subscriptions.forms import SubscriptionForm
 
+"""
+Um tipo de abordagem é cada classe representar um cenário de teste,
+ou caso de teste.
+"""
 
-class SubscribeTest(TestCase):
+
+class SubscribeFormTest(TestCase):
 
     def setUp(self) -> None:
         self.response = self.client.get('/inscricao/')
@@ -68,14 +74,64 @@ class SubscriptionTest(TestCase):
     def test_should_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
 
-    def test_should_sent_email_with_subscription_email_subject(self):
+    def test_should_have_a_subscription_email_with_subject(self):
         email = mail.outbox[0]
         expected = 'Confirmação de Inscrição'
 
         self.assertEqual(expected, email.subject)
 
-    def test_should_sent_email_with_subscription_email_from(self):
+    def test_should_have_a_subscription_email_with_from(self):
         email = mail.outbox[0]
         expected = 'contato@eventex.com'
 
         self.assertEqual(expected, email.from_email)
+
+    def test_should_have_a_subscription_email_with_to(self):
+        email = mail.outbox[0]
+        expected = ['contato@eventex.com', 'atmos@email.com']
+
+        self.assertEqual(expected, email.to)
+
+    def test_should_have_a_subscription_email_with_body(self):
+        email = mail.outbox[0]
+
+        self.assertIn('Atmos Maciel', email.body)
+        self.assertIn('12345678901', email.body)
+        self.assertIn('atmos@email.com', email.body)
+        self.assertIn('12-91234-5678', email.body)
+
+
+class SubscribeInvalidPost(TestCase):
+
+    def setUp(self) -> None:
+        self.response = self.client.post('/inscricao/', {})
+
+    def test_should_not_redirect_when_request_post_is_invalid(self):
+        self.assertEqual(200, self.response.status_code)
+
+    def test_should_that_correct_template_is_used(self):
+        self.assertTemplateUsed(
+            self.response, 'subscriptions/subscription_form.html'
+        )
+
+    def test_should_template_has_a_form(self):
+        form = self.response.context['form']
+        self.assertIsInstance(form, SubscriptionForm)
+
+    def test_that_form_has_errors(self):
+        form = self.response.context['form']
+        self.assertTrue(form.errors)
+
+
+class SubscribeSuccessMessage(TestCase):
+    def setUp(self) -> None:
+        data = dict(
+            name="Atmos Maciel", cpf="12345678901",
+            email="atmos@email.com", phone="12-91234-5678"
+        )
+
+        # follow=True -> segue com o redirect
+        self.response = self.client.post('/inscricao/', data=data, follow=True)
+
+    def test_success_message(self):
+        self.assertContains(self.response, 'Inscrição realizada com sucesso!')
