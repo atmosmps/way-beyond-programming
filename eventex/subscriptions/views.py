@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core import mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -10,29 +11,43 @@ As requsições chegam nas views, as views são responsáveis por
 tratar as informações.
 
 As informações da requisição são direcionadas para o Formulário do Django
-que vai tratar o dados e fazer as devidas validações. Uma vez validados,
-os dados
-
+que vai tratar o dados e fazer as devidas validações.
 """
 
 
 def subscribe(request):
     if request.method == 'POST':
         form = SubscriptionForm(request.POST)
-        form.full_clean()
 
-        body = render_to_string(
-            'subscriptions/subscription_email.txt', context=form.cleaned_data
-        )
+        if form.is_valid():
+            body = render_to_string(
+                'subscriptions/subscription_email.txt',
+                context=form.cleaned_data
+            )
 
-        mail.send_mail(
-            'Confirmação de Inscrição',
-            body,
-            'contato@eventex.com',
-            ['contato@eventex.com', form.cleaned_data['email']]
-        )
+            mail.send_mail(
+                'Confirmação de Inscrição',
+                body,
+                'contato@eventex.com',
+                ['contato@eventex.com', form.cleaned_data['email']]
+            )
 
-        return HttpResponseRedirect('/inscricao/')
+            """
+            messages é o pacote de mensagens do Django.
+
+            Essa mensagem deve ser exibida no Template do Formulário e lá deve
+            ser configurada também.
+
+            O Django já adiciona as messages automaticamente no contexto
+            do formulário quando existe, através de um context processor.
+            """
+            messages.success(request, 'Inscrição realizada com sucesso!')
+            return HttpResponseRedirect('/inscricao/')
+        else:
+            return render(
+                request, 'subscriptions/subscription_form.html',
+                context={'form': form}
+            )
     else:
         """
         Envia uma instância de SubscriptionForm para o context do formulário.
