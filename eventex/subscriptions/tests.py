@@ -63,7 +63,7 @@ class SubscriptionTest(TestCase):
     def setUp(self) -> None:
         data = dict(
             name="Atmos Maciel", cpf="12345678901",
-            email="atmos@email.com", phone="12-91234-5678"
+            email="atmos.mps@gmail.com", phone="12-91234-5678"
         )
 
         self.response = self.client.post('/inscricao/', data=data)
@@ -82,13 +82,13 @@ class SubscriptionTest(TestCase):
 
     def test_should_have_a_subscription_email_with_from(self):
         email = mail.outbox[0]
-        expected = 'contato@eventex.com'
+        expected = 'atmos.mps@gmail.com'
 
         self.assertEqual(expected, email.from_email)
 
     def test_should_have_a_subscription_email_with_to(self):
         email = mail.outbox[0]
-        expected = ['contato@eventex.com', 'atmos@email.com']
+        expected = ['atmos.mps@gmail.com', 'atmos.mps@gmail.com']
 
         self.assertEqual(expected, email.to)
 
@@ -97,7 +97,7 @@ class SubscriptionTest(TestCase):
 
         self.assertIn('Atmos Maciel', email.body)
         self.assertIn('12345678901', email.body)
-        self.assertIn('atmos@email.com', email.body)
+        self.assertIn('atmos.mps@gmail.com', email.body)
         self.assertIn('12-91234-5678', email.body)
 
 
@@ -127,7 +127,7 @@ class SubscribeSuccessMessage(TestCase):
     def setUp(self) -> None:
         data = dict(
             name="Atmos Maciel", cpf="12345678901",
-            email="atmos@email.com", phone="12-91234-5678"
+            email="atmos.mps@gmail.com", phone="12-91234-5678"
         )
 
         # follow=True -> segue com o redirect

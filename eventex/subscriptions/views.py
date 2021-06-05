@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.core import mail
 from django.http import HttpResponseRedirect
@@ -28,8 +29,8 @@ def subscribe(request):
             mail.send_mail(
                 'Confirmação de Inscrição',
                 body,
-                'contato@eventex.com',
-                ['contato@eventex.com', form.cleaned_data['email']]
+                settings.FROM_EMAIL,
+                [settings.RECIPIENT_LIST, form.cleaned_data['email']]
             )
 
             """
