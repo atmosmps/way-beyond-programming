@@ -9,7 +9,7 @@ ou caso de teste.
 """
 
 
-class SubscribeFormTest(TestCase):
+class SubscribeGet(TestCase):
 
     def setUp(self) -> None:
         self.response = self.client.get('/inscricao/')
@@ -32,12 +32,16 @@ class SubscribeFormTest(TestCase):
         """
         HTML must contain input tags
         """
-
-        self.assertContains(self.response, '<form')
-        self.assertContains(self.response, '<input', 6)
-        self.assertContains(self.response, 'type="text"', 3)
-        self.assertContains(self.response, 'type="email"')
-        self.assertContains(self.response, 'type="submit"')
+        tags = (
+            ('<form', 1),
+            ('<input', 6),
+            ('type="text"', 3),
+            ('type="email"', 1),
+            ('type="submit"', 1),
+        )
+        for text, count in tags:
+            with self.subTest():
+                self.assertContains(self.response, text, count)
 
     def test_should_must_contains_csrf_tokern(self):
         """
@@ -51,14 +55,8 @@ class SubscribeFormTest(TestCase):
         form = self.response.context['form']
         self.assertIsInstance(form, SubscriptionForm)
 
-    def test_should_form_has_four_fields(self):
-        form = self.response.context['form']
-        self.assertSequenceEqual(
-            ['name', 'cpf', 'email', 'phone'], list(form.fields)
-        )
 
-
-class SubscriptionTest(TestCase):
+class SubscribePostValid(TestCase):
 
     def setUp(self) -> None:
         data = dict(
@@ -74,34 +72,8 @@ class SubscriptionTest(TestCase):
     def test_should_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
 
-    def test_should_have_a_subscription_email_with_subject(self):
-        email = mail.outbox[0]
-        expected = 'Confirmação de Inscrição'
 
-        self.assertEqual(expected, email.subject)
-
-    def test_should_have_a_subscription_email_with_from(self):
-        email = mail.outbox[0]
-        expected = 'atmos.mps@gmail.com'
-
-        self.assertEqual(expected, email.from_email)
-
-    def test_should_have_a_subscription_email_with_to(self):
-        email = mail.outbox[0]
-        expected = ['atmos.mps@gmail.com', 'atmos.mps@gmail.com']
-
-        self.assertEqual(expected, email.to)
-
-    def test_should_have_a_subscription_email_with_body(self):
-        email = mail.outbox[0]
-
-        self.assertIn('Atmos Maciel', email.body)
-        self.assertIn('12345678901', email.body)
-        self.assertIn('atmos.mps@gmail.com', email.body)
-        self.assertIn('12-91234-5678', email.body)
-
-
-class SubscribeInvalidPost(TestCase):
+class SubscribePostInvalid(TestCase):
 
     def setUp(self) -> None:
         self.response = self.client.post('/inscricao/', {})
