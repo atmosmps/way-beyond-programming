@@ -17,6 +17,8 @@
 
 ---
 
+## [Eventex](eventex/README.md)
+
 ## [Mentoring](./mentoring)
 
 ## WTTD Training
