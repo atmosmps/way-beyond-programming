@@ -23,7 +23,7 @@
 
 ## WTTD Training
 
-### [Notes](wttd-training/notes/main.md)
+### [Notes](wttd-training/notes)
 
 - [X] Aulas in Live
 - [X] Começe por aqui
@@ -41,3 +41,8 @@
     - [BONUS: Raio X do Django](wttd-training/2-ready-is-when-its-on-the-air/django-x-ray.md)
     - [Visão além do alcançe](wttd-training/2-ready-is-when-its-on-the-air/vision-beyond-reach.md)
 - [ ] Desenvolvimento Ágil
+- [ ] Conquistando seu Cliente
+- [ ] Trabalhando para não ter trabalho
+- [ ] O Caminho da Autonomia
+- [ ] Descubra o seu próximo passo...
+- [ ] Um gostinho da Mentoria Modo Carreira...
