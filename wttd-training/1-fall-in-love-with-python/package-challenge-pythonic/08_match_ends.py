@@ -9,23 +9,28 @@ PS: Python não possui o operador ++, porém += funciona.
 """
 
 
-def match_ends(words):
-    # Generator Expressions - https://www.geeksforgeeks.org/generator-expressions/
-    # https://dbader.org/blog/python-generator-expressions
-    # https://www.programiz.com/python-programming/generator
-
-    # Solution 0
-    # result = []
-    # for word in words:
-    #     if (len(word) >= 2) and (word[-1:] == word[:1]):
-    #
-    # return len(result)
-
-    # Solution 1
+def match_ends_list_comprehension_v0(words):
     result = []
     return len([result.append(word) for word in words if (len(word) >= 2) and (word[-1:] == word[:1])])
 
+
+def match_ends_list_comprehension_v1(words):
+    return len([word for word in words if len(word) > 1 and word[0] == word[-1]])
+
+
+def match_ends_generator(words):
+    return sum((1 for word in words if len(word) > 1 and word[0] == word[-1]))
+
+
+def match_ends(words):
+    result = []
+    for word in words:
+        if (len(word) >= 2) and (word[-1:] == word[:1]):
+            result.append(word)
+    return len(result)
+
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
+
 
 def test(f, in_, expected):
     """
@@ -49,3 +54,15 @@ if __name__ == '__main__':
     test(match_ends, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
     test(match_ends, ['', 'x', 'xy', 'xyx', 'xx'], 2)
     test(match_ends, ['aaa', 'be', 'abc', 'hello'], 1)
+
+    test(match_ends_list_comprehension_v0, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
+    test(match_ends_list_comprehension_v0, ['', 'x', 'xy', 'xyx', 'xx'], 2)
+    test(match_ends_list_comprehension_v0, ['aaa', 'be', 'abc', 'hello'], 1)
+
+    test(match_ends_list_comprehension_v1, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
+    test(match_ends_list_comprehension_v1, ['', 'x', 'xy', 'xyx', 'xx'], 2)
+    test(match_ends_list_comprehension_v1, ['aaa', 'be', 'abc', 'hello'], 1)
+
+    test(match_ends_generator, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
+    test(match_ends_generator, ['', 'x', 'xy', 'xyx', 'xx'], 2)
+    test(match_ends_generator, ['aaa', 'be', 'abc', 'hello'], 1)
