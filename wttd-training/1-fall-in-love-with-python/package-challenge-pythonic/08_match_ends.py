@@ -11,11 +11,11 @@ PS: Python não possui o operador ++, porém += funciona.
 
 def match_ends_list_comprehension_v0(words):
     result = []
-    return len([result.append(word) for word in words if (len(word) >= 2) and (word[-1:] == word[:1])])
+    return len([result.append(word) for word in words if (len(word) >= 2) and (word[-1:] == word[:1])])  # noqa
 
 
 def match_ends_list_comprehension_v1(words):
-    return len([word for word in words if len(word) > 1 and word[0] == word[-1]])
+    return len([word for word in words if len(word) > 1 and word[0] == word[-1]])  # noqa
 
 
 def match_ends_generator(words):
