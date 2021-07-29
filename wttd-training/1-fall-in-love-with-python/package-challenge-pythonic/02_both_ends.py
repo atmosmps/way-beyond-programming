@@ -8,21 +8,22 @@ for menor que 2, retorne uma string vazia.
 """
 
 
+def both_ends_in_line(s):
+    return '' if len(s) < 2 else s[:2] + s[-2:]
+
+
+def both_ends_slices(s):
+    length = len(s)
+    first = s[:2]
+    last = s[-2:]
+
+    if length < 2:
+        return ''
+
+    return first + last
+
+
 def both_ends(s):
-    # Solution 1
-    # return '' if len(s) < 2 else s[:2] + s[-2:]
-
-    # Solution 2
-    # length = len(s)
-    # first = s[:2]
-    # last = s[-2:]
-    #
-    # if length < 2:
-    #     return ''
-    #
-    # return first + last
-
-    # Solution 3
     is_one_word_str = isinstance(s, str) and len(s.split()) == 1
     output = []
     if is_one_word_str:
@@ -62,6 +63,16 @@ def test(f, in_, expected):
 
 if __name__ == '__main__':
     # Testes que verificam o resultado do seu código em alguns cenários.
+    test(both_ends_in_line, 'spring', 'spng')
+    test(both_ends_in_line, 'Hello', 'Helo')
+    test(both_ends_in_line, 'a', '')
+    test(both_ends_in_line, 'xyz', 'xyyz')
+
+    test(both_ends_slices, 'spring', 'spng')
+    test(both_ends_slices, 'Hello', 'Helo')
+    test(both_ends_slices, 'a', '')
+    test(both_ends_slices, 'xyz', 'xyyz')
+
     test(both_ends, 'spring', 'spng')
     test(both_ends, 'Hello', 'Helo')
     test(both_ends, 'a', '')

@@ -12,7 +12,6 @@ Retorne o resultado da string.
 
 
 def verbing(s):
-    # Solution 1
     present_continuous = 'ing'
     adverbs_manner = 'ly'
 
@@ -28,6 +27,7 @@ def verbing(s):
         return result
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
+
 
 def test(f, in_, expected):
     """

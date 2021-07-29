@@ -14,7 +14,9 @@ onde todas as instancias de stra foram substituidas por strb.
 """
 
 
-def replace_occurrence(sentence: str = None, occurrence: str = None, target: str = None):
+def replace_occurrence(
+    sentence: str = None, occurrence: str = None, target: str = None
+):
     if (sentence or occurrence or target) is None:
         return None
 
@@ -29,11 +31,11 @@ def replace_occurrence(sentence: str = None, occurrence: str = None, target: str
     return result
 
 
-def fix_start(s):
-    # Solution 1
-    # return s[0] + s.replace(s[0], "*")[1:]
+def fix_start_in_line(s):
+    return s[0] + s.replace(s[0], "*")[1:]
 
-    # Solution 2
+
+def fix_start(s):
     return s[0] + replace_occurrence(s, s[0], '*')[1:]
 
 
@@ -58,6 +60,11 @@ def test(f, in_, expected):
 
 if __name__ == '__main__':
     # Testes que verificam o resultado do seu código em alguns cenários.
+    test(fix_start_in_line, 'babble', 'ba**le')
+    test(fix_start_in_line, 'aardvark', 'a*rdv*rk')
+    test(fix_start_in_line, 'google', 'goo*le')
+    test(fix_start_in_line, 'donut', 'donut')
+
     test(fix_start, 'babble', 'ba**le')
     test(fix_start, 'aardvark', 'a*rdv*rk')
     test(fix_start, 'google', 'goo*le')

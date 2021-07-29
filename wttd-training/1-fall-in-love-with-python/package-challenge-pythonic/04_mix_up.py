@@ -14,22 +14,26 @@ New rule: Assuma que a e b são strings não vazias e não Nulas.
 """
 
 
+def mix_up_slice(a, b):
+    mix_first_a = a.replace(a[:2], b[:2])
+    mix_first_b = b.replace(b[:2], a[:2])
+
+    mix_up_slice = '{} {}'.format(mix_first_a, mix_first_b)
+    return mix_up_slice
+
+
+def mix_up_in_line(a, b):
+    return '{} {}'.format(a.replace(a[:2], b[:2]), b.replace(b[:2], a[:2]))
+
+
 def mix_up(a, b):
-    # Solution 1
-    # mix_first_a = a.replace(a[:2], b[:2])
-    # mix_first_b = b.replace(b[:2], a[:2])
-    #
-    # mix_up_result = '{} {}'.format(mix_first_a, mix_first_b)
-    #
-    # return mix_up_result
-
-    # Solution 2
-    # return '{} {}'.format(a.replace(a[:2], b[:2]), b.replace(b[:2], a[:2]))
-
-    # Solution 3
-    return ''.join('Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')\
-        if (((a == '') or (b == '')) or ((a == None) or (b == None)))\
-        else ' '.join((a.replace(a[0:2], b[:2]), b.replace(b[0:2], a[:2])))
+    return (
+        ''.join(
+            'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.'  # noqa
+        ) if (
+                ((a == '') or (b == '')) or ((a is None) or (b is None))
+        ) else ' '.join((a.replace(a[0:2], b[:2]), b.replace(b[0:2], a[:2])))
+    )
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
@@ -60,7 +64,23 @@ if __name__ == '__main__':
     test(mix_up, ('a', 't'), 't a')
     test(mix_up, ('at', 'm'), 'm at')
     test(mix_up, ('a', 'tm'), 'tm a')
-    test(mix_up, ('', ''), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')
-    test(mix_up, ('a', ''), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')
-    test(mix_up, ('', 't'), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')
-    test(mix_up, (None, None), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')
+    test(mix_up, ('', ''), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')  # noqa
+    test(mix_up, ('a', ''), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')  # noqa
+    test(mix_up, ('', 't'), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')  # noqa
+    test(mix_up, (None, None), 'Ambas as strings estão vazias ou são Nulas, ou apenas uma delas está vazia, ou é nula.')  # noqa
+
+    test(mix_up_slice, ('mix', 'pod'), 'pox mid')
+    test(mix_up_slice, ('dog', 'dinner'), 'dig donner')
+    test(mix_up_slice, ('gnash', 'sport'), 'spash gnort')
+    test(mix_up_slice, ('pezzy', 'firm'), 'fizzy perm')
+    test(mix_up_slice, ('a', 't'), 't a')
+    test(mix_up_slice, ('at', 'm'), 'm at')
+    test(mix_up_slice, ('a', 'tm'), 'tm a')
+
+    test(mix_up_in_line, ('mix', 'pod'), 'pox mid')
+    test(mix_up_in_line, ('dog', 'dinner'), 'dig donner')
+    test(mix_up_in_line, ('gnash', 'sport'), 'spash gnort')
+    test(mix_up_in_line, ('pezzy', 'firm'), 'fizzy perm')
+    test(mix_up_in_line, ('a', 't'), 't a')
+    test(mix_up_in_line, ('at', 'm'), 'm at')
+    test(mix_up_in_line, ('a', 'tm'), 'tm a')
