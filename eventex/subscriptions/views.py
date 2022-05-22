@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.template.loader import render_to_string
 
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.models import Subscription
 
 """
 As requsições chegam nas views, as views são responsáveis por
@@ -40,6 +41,8 @@ def create(request):
         from_=settings.DEFAULT_FROM_EMAIL,
         to=form.cleaned_data['email']
     )
+
+    Subscription.objects.create(**form.cleaned_data)
 
     """
     messages é o pacote de mensagens do Django.
