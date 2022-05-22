@@ -16,7 +16,7 @@ https://github.com/atmosmps/way-beyond-programming
 cd way-beyond-programming
 python -m venv .way-beyond-programming
 source .way-beyond-programming/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 cp contrib/env-sample .env
 python manage.py test
 ```
