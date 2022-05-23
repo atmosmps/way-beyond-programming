@@ -23,3 +23,6 @@ class SubscriptionModelTest(TestCase):
         self
     ):
         self.assertIsInstance(self.obj.created_at, datetime)
+
+    def test_str_representation(self):
+        self.assertEqual('Atmos Maciel', str(self.obj))
