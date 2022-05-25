@@ -13,6 +13,7 @@ class Subscription(models.Model):
     class Meta:
         verbose_name = "inscrição"
         verbose_name_plural = "inscrições"
+        ordering = ('-created_at', )  # indica que o model será ordenado de maneira decrescente  # noqa
 
     def __str__(self):
         return self.name
