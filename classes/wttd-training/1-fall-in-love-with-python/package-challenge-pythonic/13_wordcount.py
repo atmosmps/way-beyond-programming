@@ -53,7 +53,6 @@ e conferindo cada etapa do seu progresso.
 
 import sys
 
-
 # +++ SUA SOLUÇÃO +++
 # Defina as funções print_words(filename) e print_top(filename).
 
@@ -62,19 +61,21 @@ import sys
 # parêtros do programa.
 def main():
     if len(sys.argv) != 3:
-        print('Utilização: ./13_wordcount.py {--count | --topcount} file')
+        print("Utilização: ./13_wordcount.py {--count | --topcount} file")
         sys.exit(1)
 
     option = sys.argv[1]
     filename = sys.argv[2]
-    if option == '--count':
-        print_words(filename)
-    elif option == '--topcount':
-        print_top(filename)
+    if option == "--count":
+        # print_words(filename)
+        return True
+    elif option == "--topcount":
+        # print_top(filename)
+        return True
     else:
-        print('unknown option: ' + option)
+        print("unknown option: " + option)
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

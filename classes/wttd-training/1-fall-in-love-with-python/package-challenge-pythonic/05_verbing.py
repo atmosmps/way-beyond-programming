@@ -12,8 +12,8 @@ Retorne o resultado da string.
 
 
 def verbing(s):
-    present_continuous = 'ing'
-    adverbs_manner = 'ly'
+    present_continuous = "ing"
+    adverbs_manner = "ly"
 
     if len(s) < 3:
         return s
@@ -26,6 +26,7 @@ def verbing(s):
 
         return result
 
+
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
 
@@ -37,17 +38,17 @@ def test(f, in_, expected):
     out = f(in_)
 
     if out == expected:
-        sign = '✅'
-        info = ''
+        sign = "✅"
+        info = ""
     else:
-        sign = '❌'
-        info = f'e o correto é {expected!r}'
+        sign = "❌"
+        info = f"e o correto é {expected!r}"
 
-    print(f'{sign} {f.__name__}({in_!r}) retornou {out!r} {info}')
+    print(f"{sign} {f.__name__}({in_!r}) retornou {out!r} {info}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Testes que verificam o resultado do seu código em alguns cenários.
-    test(verbing, 'hail', 'hailing')
-    test(verbing, 'swiming', 'swimingly')
-    test(verbing, 'do', 'do')
+    test(verbing, "hail", "hailing")
+    test(verbing, "swiming", "swimingly")
+    test(verbing, "do", "do")

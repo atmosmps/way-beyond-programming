@@ -15,7 +15,7 @@ resultado esperado: [[1, 'a'], [2, 'b'], [3, 'c'], [4, 'd'], [5, 'e']]
 
 def zippy():
     x = [1, 2, 3, 4, 5]
-    y = ['a', 'b', 'c', 'd', 'e']
+    y = ["a", "b", "c", "d", "e"]
     zipper = []
 
     for i in range(len(x)):
@@ -36,5 +36,5 @@ def main():
     zippy()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

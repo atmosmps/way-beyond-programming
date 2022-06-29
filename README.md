@@ -40,8 +40,8 @@
 - [X] Pronto é quando está no ar!
     - [BONUS: Raio X do Django](wttd-training/2-ready-is-when-its-on-the-air/django-x-ray.md)
     - [Visão além do alcançe](wttd-training/2-ready-is-when-its-on-the-air/vision-beyond-reach.md)
-- [ ] Desenvolvimento Ágil
-- [ ] Conquistando seu Cliente
+- [X] Desenvolvimento Ágil
+- [ ] Conquistando seu Clientes
 - [ ] Trabalhando para não ter trabalho
 - [ ] O Caminho da Autonomia
 - [ ] Descubra o seu próximo passo...

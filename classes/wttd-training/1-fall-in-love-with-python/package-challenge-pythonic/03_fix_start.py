@@ -27,7 +27,7 @@ def replace_occurrence(
         if value == occurrence:
             sentence_list[index] = target
 
-    result = ''.join(sentence_list)
+    result = "".join(sentence_list)
     return result
 
 
@@ -36,10 +36,11 @@ def fix_start_in_line(s):
 
 
 def fix_start(s):
-    return s[0] + replace_occurrence(s, s[0], '*')[1:]
+    return s[0] + replace_occurrence(s, s[0], "*")[1:]
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
+
 
 def test(f, in_, expected):
     """
@@ -49,23 +50,23 @@ def test(f, in_, expected):
     out = f(in_)
 
     if out == expected:
-        sign = '✅'
-        info = ''
+        sign = "✅"
+        info = ""
     else:
-        sign = '❌'
-        info = f'e o correto é {expected!r}'
+        sign = "❌"
+        info = f"e o correto é {expected!r}"
 
-    print(f'{sign} {f.__name__}({in_!r}) retornou {out!r} {info}')
+    print(f"{sign} {f.__name__}({in_!r}) retornou {out!r} {info}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Testes que verificam o resultado do seu código em alguns cenários.
-    test(fix_start_in_line, 'babble', 'ba**le')
-    test(fix_start_in_line, 'aardvark', 'a*rdv*rk')
-    test(fix_start_in_line, 'google', 'goo*le')
-    test(fix_start_in_line, 'donut', 'donut')
+    test(fix_start_in_line, "babble", "ba**le")
+    test(fix_start_in_line, "aardvark", "a*rdv*rk")
+    test(fix_start_in_line, "google", "goo*le")
+    test(fix_start_in_line, "donut", "donut")
 
-    test(fix_start, 'babble', 'ba**le')
-    test(fix_start, 'aardvark', 'a*rdv*rk')
-    test(fix_start, 'google', 'goo*le')
-    test(fix_start, 'donut', 'donut')
+    test(fix_start, "babble", "ba**le")
+    test(fix_start, "aardvark", "a*rdv*rk")
+    test(fix_start, "google", "goo*le")
+    test(fix_start, "donut", "donut")

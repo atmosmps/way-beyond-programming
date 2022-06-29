@@ -4,18 +4,19 @@ from django.test import TestCase
 
 
 class SubscribePostValid(TestCase):
-
     def setUp(self) -> None:
         data = dict(
-            name="Atmos Maciel", cpf="12345678901",
-            email=settings.DEFAULT_FROM_EMAIL, phone="12-91234-5678"
+            name="Atmos Maciel",
+            cpf="12345678901",
+            email=settings.DEFAULT_FROM_EMAIL,
+            phone="12-91234-5678",
         )
 
-        self.client.post('/inscricao/', data=data)
+        self.client.post("/inscricao/", data=data)
         self.email = mail.outbox[0]
 
     def test_should_have_a_subscription_email_with_subject(self):
-        expected = 'Confirmação de Inscrição'
+        expected = "Confirmação de Inscrição"
         self.assertEqual(expected, self.email.subject)
 
     def test_should_have_a_subscription_email_with_from(self):
@@ -28,10 +29,10 @@ class SubscribePostValid(TestCase):
 
     def test_should_have_a_subscription_email_with_body(self):
         contents = [
-            'Atmos Maciel',
-            '12345678901',
+            "Atmos Maciel",
+            "12345678901",
             settings.DEFAULT_FROM_EMAIL,
-            '12-91234-5678',
+            "12-91234-5678",
         ]
         for content in contents:
             with self.subTest():

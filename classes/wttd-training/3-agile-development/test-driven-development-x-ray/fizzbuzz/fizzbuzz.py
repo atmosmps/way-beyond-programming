@@ -47,9 +47,9 @@ if __name__ == '__main__':
     assert_equal(robot(45), 'fizzbuzz')
 """
 
-FIZZ = 'fizz'
-BUZZ = 'buzz'
-FIZZBUZZ = 'fizzbuzz'
+FIZZ = "fizz"
+BUZZ = "buzz"
+FIZZBUZZ = "fizzbuzz"
 
 
 multiple_of = lambda base, num: num % base == 0

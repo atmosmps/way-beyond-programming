@@ -11,11 +11,19 @@ PS: Python não possui o operador ++, porém += funciona.
 
 def match_ends_list_comprehension_v0(words):
     result = []
-    return len([result.append(word) for word in words if (len(word) >= 2) and (word[-1:] == word[:1])])  # noqa
+    return len(
+        [
+            result.append(word)
+            for word in words
+            if (len(word) >= 2) and (word[-1:] == word[:1])
+        ]
+    )  # noqa
 
 
 def match_ends_list_comprehension_v1(words):
-    return len([word for word in words if len(word) > 1 and word[0] == word[-1]])  # noqa
+    return len(
+        [word for word in words if len(word) > 1 and word[0] == word[-1]]
+    )  # noqa
 
 
 def match_ends_generator(words):
@@ -29,6 +37,7 @@ def match_ends(words):
             result.append(word)
     return len(result)
 
+
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
 
 
@@ -40,29 +49,29 @@ def test(f, in_, expected):
     out = f(in_)
 
     if out == expected:
-        sign = '✅'
-        info = ''
+        sign = "✅"
+        info = ""
     else:
-        sign = '❌'
-        info = f'e o correto é {expected!r}'
+        sign = "❌"
+        info = f"e o correto é {expected!r}"
 
-    print(f'{sign} {f.__name__}({in_!r}) retornou {out!r} {info}')
+    print(f"{sign} {f.__name__}({in_!r}) retornou {out!r} {info}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Testes que verificam o resultado do seu código em alguns cenários.
-    test(match_ends, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
-    test(match_ends, ['', 'x', 'xy', 'xyx', 'xx'], 2)
-    test(match_ends, ['aaa', 'be', 'abc', 'hello'], 1)
+    test(match_ends, ["aba", "xyz", "aa", "x", "bbb"], 3)
+    test(match_ends, ["", "x", "xy", "xyx", "xx"], 2)
+    test(match_ends, ["aaa", "be", "abc", "hello"], 1)
 
-    test(match_ends_list_comprehension_v0, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
-    test(match_ends_list_comprehension_v0, ['', 'x', 'xy', 'xyx', 'xx'], 2)
-    test(match_ends_list_comprehension_v0, ['aaa', 'be', 'abc', 'hello'], 1)
+    test(match_ends_list_comprehension_v0, ["aba", "xyz", "aa", "x", "bbb"], 3)
+    test(match_ends_list_comprehension_v0, ["", "x", "xy", "xyx", "xx"], 2)
+    test(match_ends_list_comprehension_v0, ["aaa", "be", "abc", "hello"], 1)
 
-    test(match_ends_list_comprehension_v1, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
-    test(match_ends_list_comprehension_v1, ['', 'x', 'xy', 'xyx', 'xx'], 2)
-    test(match_ends_list_comprehension_v1, ['aaa', 'be', 'abc', 'hello'], 1)
+    test(match_ends_list_comprehension_v1, ["aba", "xyz", "aa", "x", "bbb"], 3)
+    test(match_ends_list_comprehension_v1, ["", "x", "xy", "xyx", "xx"], 2)
+    test(match_ends_list_comprehension_v1, ["aaa", "be", "abc", "hello"], 1)
 
-    test(match_ends_generator, ['aba', 'xyz', 'aa', 'x', 'bbb'], 3)
-    test(match_ends_generator, ['', 'x', 'xy', 'xyx', 'xx'], 2)
-    test(match_ends_generator, ['aaa', 'be', 'abc', 'hello'], 1)
+    test(match_ends_generator, ["aba", "xyz", "aa", "x", "bbb"], 3)
+    test(match_ends_generator, ["", "x", "xy", "xyx", "xx"], 2)
+    test(match_ends_generator, ["aaa", "be", "abc", "hello"], 1)

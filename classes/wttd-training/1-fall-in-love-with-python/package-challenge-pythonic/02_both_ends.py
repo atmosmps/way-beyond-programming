@@ -9,7 +9,7 @@ for menor que 2, retorne uma string vazia.
 
 
 def both_ends_in_line(s):
-    return '' if len(s) < 2 else s[:2] + s[-2:]
+    return "" if len(s) < 2 else s[:2] + s[-2:]
 
 
 def both_ends_slices(s):
@@ -18,7 +18,7 @@ def both_ends_slices(s):
     last = s[-2:]
 
     if length < 2:
-        return ''
+        return ""
 
     return first + last
 
@@ -39,10 +39,11 @@ def both_ends(s):
                 count += 1
             output.extend([*first_part, *last_part])
 
-    return ''.join(output)
+    return "".join(output)
 
 
 # --- Daqui para baixo são apenas códigos auxiliáries de teste. ---
+
 
 def test(f, in_, expected):
     """
@@ -52,28 +53,28 @@ def test(f, in_, expected):
     out = f(in_)
 
     if out == expected:
-        sign = '✅'
-        info = ''
+        sign = "✅"
+        info = ""
     else:
-        sign = '❌'
-        info = f'e o correto é {expected!r}'
+        sign = "❌"
+        info = f"e o correto é {expected!r}"
 
-    print(f'{sign} {f.__name__}({in_!r}) retornou {out!r} {info}')
+    print(f"{sign} {f.__name__}({in_!r}) retornou {out!r} {info}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # Testes que verificam o resultado do seu código em alguns cenários.
-    test(both_ends_in_line, 'spring', 'spng')
-    test(both_ends_in_line, 'Hello', 'Helo')
-    test(both_ends_in_line, 'a', '')
-    test(both_ends_in_line, 'xyz', 'xyyz')
+    test(both_ends_in_line, "spring", "spng")
+    test(both_ends_in_line, "Hello", "Helo")
+    test(both_ends_in_line, "a", "")
+    test(both_ends_in_line, "xyz", "xyyz")
 
-    test(both_ends_slices, 'spring', 'spng')
-    test(both_ends_slices, 'Hello', 'Helo')
-    test(both_ends_slices, 'a', '')
-    test(both_ends_slices, 'xyz', 'xyyz')
+    test(both_ends_slices, "spring", "spng")
+    test(both_ends_slices, "Hello", "Helo")
+    test(both_ends_slices, "a", "")
+    test(both_ends_slices, "xyz", "xyyz")
 
-    test(both_ends, 'spring', 'spng')
-    test(both_ends, 'Hello', 'Helo')
-    test(both_ends, 'a', '')
-    test(both_ends, 'xyz', 'xyyz')
+    test(both_ends, "spring", "spng")
+    test(both_ends, "Hello", "Helo")
+    test(both_ends, "a", "")
+    test(both_ends, "xyz", "xyyz")
