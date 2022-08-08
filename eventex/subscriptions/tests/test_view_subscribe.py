@@ -1,3 +1,5 @@
+import unittest
+
 from django.core import mail
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
@@ -23,7 +25,9 @@ class SubscribeGet(TestCase):
         """
         Must use subscriptions/subscription_form.html
         """
-        self.assertTemplateUsed(self.response, "subscriptions/subscription_form.html")
+        self.assertTemplateUsed(
+            self.response, "subscriptions/subscription_form.html"
+        )
 
     def test_html(self):
         """
@@ -65,7 +69,11 @@ class SubscribePostValid(TestCase):
         self.response = self.client.post("/inscricao/", data=data)
 
     def test_post_action(self):
-        self.assertEqual(302, self.response.status_code)
+        self.assertRedirects(
+            response=self.response,
+            expected_url='/inscricao/1/',
+            status_code=302
+        )
 
     def test_should_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
@@ -82,7 +90,9 @@ class SubscribePostInvalid(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_should_that_correct_template_is_used(self):
-        self.assertTemplateUsed(self.response, "subscriptions/subscription_form.html")
+        self.assertTemplateUsed(
+            self.response, "subscriptions/subscription_form.html"
+        )
 
     def test_should_template_has_a_form(self):
         form = self.response.context["form"]
@@ -96,6 +106,7 @@ class SubscribePostInvalid(TestCase):
         self.assertFalse(Subscription.objects.exists())
 
 
+@unittest.skip('To be removed')
 class SubscribeSuccessMessage(TestCase):
     def setUp(self) -> None:
         data = dict(
