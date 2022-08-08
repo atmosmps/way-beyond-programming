@@ -104,20 +104,3 @@ class SubscribePostInvalid(TestCase):
 
     def test_dont_save_subscription(self):
         self.assertFalse(Subscription.objects.exists())
-
-
-@unittest.skip('To be removed')
-class SubscribeSuccessMessage(TestCase):
-    def setUp(self) -> None:
-        data = dict(
-            name="Atmos Maciel",
-            cpf="12345678901",
-            email="atmos.mps@gmail.com",
-            phone="12-91234-5678",
-        )
-
-        # follow=True -> segue com o redirect
-        self.response = self.client.post("/inscricao/", data=data, follow=True)
-
-    def test_success_message(self):
-        self.assertContains(self.response, "Inscrição realizada com sucesso!")
