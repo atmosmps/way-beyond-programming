@@ -29,33 +29,22 @@ def create(request):
     if not form.is_valid():
         """Abort Return"""
         return render(
-            request, "subscriptions/subscription_form.html", context={"form": form}
+            request, "subscriptions/subscription_form.html", context={
+                "form": form
+            }
         )
+
+    subscription = Subscription.objects.create(**form.cleaned_data)  # the create always return the creted instance # noqa
 
     _send_email(
         template_name="subscriptions/subscription_email.txt",
-        context=form.cleaned_data,
+        context={'subscription': subscription},
         subject="Confirmação de Inscrição",
         from_=settings.DEFAULT_FROM_EMAIL,
         to=form.cleaned_data["email"],
     )
 
-    Subscription.objects.create(**form.cleaned_data)
-
-    """
-    messages é o pacote de mensagens do Django.
-
-    Essa mensagem deve ser exibida no Template do Formulário e lá deve
-    ser configurada também.
-
-    O Django já adiciona as messages automaticamente no contexto
-    do formulário quando existe, através de um context processor.
-    """
-
-    # Success Feedback
-    messages.success(request, "Inscrição realizada com sucesso!")
-
-    return HttpResponseRedirect("/inscricao/")
+    return HttpResponseRedirect("/inscricao/{pk}/".format(pk=subscription.pk))
 
 
 def new(request):
@@ -68,6 +57,11 @@ def new(request):
         "subscriptions/subscription_form.html",
         context={"form": SubscriptionForm()},
     )
+
+
+def detail(request):
+    from django.http import HttpResponse
+    return HttpResponse()
 
 
 def _send_email(subject, from_, to, template_name, context):
