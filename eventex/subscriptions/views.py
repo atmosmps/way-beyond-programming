@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django.conf import settings
 from django.core import mail
 from django.http import Http404, HttpResponseRedirect
@@ -25,6 +27,7 @@ def subscribe(request):
 
 def create(request):
     form = SubscriptionForm(request.POST)
+    form.cleaned_data = {"uuid": uuid4}
 
     if not form.is_valid():
         """Abort Return"""
@@ -43,7 +46,7 @@ def create(request):
         to=subscription.email,
     )
 
-    return HttpResponseRedirect(f"/inscricao/{subscription.pk}/")
+    return HttpResponseRedirect(f"/inscricao/{subscription.uuid}/")
 
 
 def new(request):
@@ -58,9 +61,9 @@ def new(request):
     )
 
 
-def detail(request, pk):
+def detail(request, uuid):
     try:
-        subscription = Subscription.objects.get(pk=pk)
+        subscription = Subscription.objects.get(uuid=uuid)
 
         return render(
             request=request,

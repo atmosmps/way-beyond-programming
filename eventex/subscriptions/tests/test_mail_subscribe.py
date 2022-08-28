@@ -6,7 +6,7 @@ from django.test import TestCase
 class SubscribePostValid(TestCase):
     def setUp(self) -> None:
         data = dict(
-            name="Atmos Maciel",
+            name="Some User Name",
             cpf="12345678901",
             email=settings.DEFAULT_FROM_EMAIL,
             phone="12-91234-5678",
@@ -29,7 +29,7 @@ class SubscribePostValid(TestCase):
 
     def test_should_have_a_subscription_email_with_body(self):
         contents = [
-            "Atmos Maciel",
+            "Some User Name",
             "12345678901",
             settings.DEFAULT_FROM_EMAIL,
             "12-91234-5678",

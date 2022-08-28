@@ -68,11 +68,7 @@ class SubscribePostValid(TestCase):
         self.response = self.client.post(f"{SUBSCRIBE_RESOURCE}/", data=data)
 
     def test_post_action(self):
-        self.assertRedirects(
-            response=self.response,
-            expected_url=f"{SUBSCRIBE_RESOURCE}/1/",
-            status_code=302,
-        )
+        self.assertEqual(302, self.response.status_code)
 
     def test_should_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
