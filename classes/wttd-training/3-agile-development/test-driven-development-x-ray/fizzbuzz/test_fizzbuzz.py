@@ -1,4 +1,5 @@
 import unittest
+
 from fizzbuzz import robot
 
 

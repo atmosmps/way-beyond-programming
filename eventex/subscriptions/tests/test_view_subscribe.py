@@ -1,7 +1,6 @@
-import unittest
-
 from django.core import mail
 from django.test import TestCase
+
 from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
 
@@ -25,9 +24,7 @@ class SubscribeGet(TestCase):
         """
         Must use subscriptions/subscription_form.html
         """
-        self.assertTemplateUsed(
-            self.response, "subscriptions/subscription_form.html"
-        )
+        self.assertTemplateUsed(self.response, "subscriptions/subscription_form.html")
 
     def test_html(self):
         """
@@ -70,9 +67,7 @@ class SubscribePostValid(TestCase):
 
     def test_post_action(self):
         self.assertRedirects(
-            response=self.response,
-            expected_url='/inscricao/1/',
-            status_code=302
+            response=self.response, expected_url="/inscricao/1/", status_code=302
         )
 
     def test_should_subscribe_email(self):
@@ -90,9 +85,7 @@ class SubscribePostInvalid(TestCase):
         self.assertEqual(200, self.response.status_code)
 
     def test_should_that_correct_template_is_used(self):
-        self.assertTemplateUsed(
-            self.response, "subscriptions/subscription_form.html"
-        )
+        self.assertTemplateUsed(self.response, "subscriptions/subscription_form.html")
 
     def test_should_template_has_a_form(self):
         form = self.response.context["form"]

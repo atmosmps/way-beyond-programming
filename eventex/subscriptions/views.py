@@ -1,9 +1,9 @@
 from django.conf import settings
-from django.contrib import messages
 from django.core import mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
+
 from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
 
@@ -32,16 +32,15 @@ def create(request):
             request, "subscriptions/subscription_form.html", context={"form": form}
         )
 
-    subscription = Subscription.objects.create(
-        **form.cleaned_data
-    )  # the create always return the creted instance # noqa
+    # the create always return the creted instance # noqa
+    subscription = Subscription.objects.create(**form.cleaned_data)
 
     _send_email(
         template_name="subscriptions/subscription_email.txt",
         context={"subscription": subscription},
         subject="Confirmação de Inscrição",
         from_=settings.DEFAULT_FROM_EMAIL,
-        to=form.cleaned_data["email"],
+        to=subscription.email,
     )
 
     return HttpResponseRedirect("/inscricao/{pk}/".format(pk=subscription.pk))
