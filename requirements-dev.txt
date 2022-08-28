@@ -1,6 +1,5 @@
 -r requirements.txt
 jupyter
-django-test-without-migrations
 debugpy
 black
 isort
