@@ -39,7 +39,7 @@ docker-log-app: docker-server
 	docker-compose logs app
 
 docker-test: docker-server
-	docker-compose exec app $(COMMAND)
+	docker-compose exec app $(COMMAND) test
 	make docker-down
 
 docker-lint: docker-server

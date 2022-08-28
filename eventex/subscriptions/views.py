@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core import mail
-from django.http import HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.template.loader import render_to_string
 
@@ -43,7 +43,7 @@ def create(request):
         to=subscription.email,
     )
 
-    return HttpResponseRedirect("/inscricao/{pk}/".format(pk=subscription.pk))
+    return HttpResponseRedirect(f"/inscricao/{subscription.pk}/")
 
 
 def new(request):
@@ -58,10 +58,17 @@ def new(request):
     )
 
 
-def detail(request):
-    from django.http import HttpResponse
+def detail(request, pk):
+    try:
+        subscription = Subscription.objects.get(pk=pk)
 
-    return HttpResponse()
+        return render(
+            request=request,
+            template_name="subscriptions/subscription_detail.html",
+            context={"subscription": subscription},
+        )
+    except Subscription.DoesNotExist:
+        raise Http404
 
 
 def _send_email(subject, from_, to, template_name, context):

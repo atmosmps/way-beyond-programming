@@ -9,10 +9,12 @@ Um tipo de abordagem é cada classe representar um cenário de teste,
 ou caso de teste.
 """
 
+SUBSCRIBE_RESOURCE = "/inscricao"
+
 
 class SubscribeGet(TestCase):
     def setUp(self) -> None:
-        self.response = self.client.get("/inscricao/")
+        self.response = self.client.get(f"{SUBSCRIBE_RESOURCE}/")
 
     def test_get(self):
         """
@@ -57,17 +59,19 @@ class SubscribeGet(TestCase):
 class SubscribePostValid(TestCase):
     def setUp(self) -> None:
         data = dict(
-            name="Atmos Maciel",
+            name="Some User Name",
             cpf="12345678901",
-            email="atmos.mps@gmail.com",
+            email="some@email.com",
             phone="12-91234-5678",
         )
 
-        self.response = self.client.post("/inscricao/", data=data)
+        self.response = self.client.post(f"{SUBSCRIBE_RESOURCE}/", data=data)
 
     def test_post_action(self):
         self.assertRedirects(
-            response=self.response, expected_url="/inscricao/1/", status_code=302
+            response=self.response,
+            expected_url=f"{SUBSCRIBE_RESOURCE}/1/",
+            status_code=302,
         )
 
     def test_should_subscribe_email(self):
