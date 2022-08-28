@@ -1,20 +1,53 @@
 COMMAND = python manage.py
 
 local-server:
-	manage.py runserver 0.0.0.0:8000
+	manage.py runserver 0.0.0.0:3000
 
 local-setup:
-	pip install -r requirements.txt
 	pip install -r requirements-dev.txt
 
-migrations:
+local-migrations:
 	$(COMMAND) makemigrations
 
-migrate:
+local-migrate:
 	$(COMMAND) migrate
 
-check-migrations:
+local-check-migrations:
 	$(COMMAND) check-migrations
 
-test:
+local-test:
 	$(COMMAND) test
+
+local-lint:
+	black --check .
+	isort --check .
+
+local-lint-fix:
+	black .
+	isort .
+
+docker-server:
+	docker-compose up -d --build
+
+docker-server-attached:
+	docker-compose up --build
+
+docker-down:
+	docker-compose down -v
+
+docker-log-app: docker-server
+	docker-compose logs app
+
+docker-test: docker-server
+	docker-compose exec app $(COMMAND)
+	make docker-down
+
+docker-lint: docker-server
+	docker-compose exec app black --check .
+	docker-compose exec app isort --check .
+	make docker-down
+
+docker-lint-fix: docker-server
+	docker-compose exec app black .
+	docker-compose exec app isort .
+	make docker-down

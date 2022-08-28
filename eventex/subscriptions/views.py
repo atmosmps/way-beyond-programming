@@ -29,16 +29,16 @@ def create(request):
     if not form.is_valid():
         """Abort Return"""
         return render(
-            request, "subscriptions/subscription_form.html", context={
-                "form": form
-            }
+            request, "subscriptions/subscription_form.html", context={"form": form}
         )
 
-    subscription = Subscription.objects.create(**form.cleaned_data)  # the create always return the creted instance # noqa
+    subscription = Subscription.objects.create(
+        **form.cleaned_data
+    )  # the create always return the creted instance # noqa
 
     _send_email(
         template_name="subscriptions/subscription_email.txt",
-        context={'subscription': subscription},
+        context={"subscription": subscription},
         subject="Confirmação de Inscrição",
         from_=settings.DEFAULT_FROM_EMAIL,
         to=form.cleaned_data["email"],
@@ -61,6 +61,7 @@ def new(request):
 
 def detail(request):
     from django.http import HttpResponse
+
     return HttpResponse()
 
 
