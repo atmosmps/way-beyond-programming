@@ -10,7 +10,7 @@ from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
 
 """
-As requsições chegam nas views, as views são responsáveis por
+As requisições chegam nas views, as views são responsáveis por
 tratar as informações.
 
 As informações da requisição são direcionadas para o Formulário do Django
