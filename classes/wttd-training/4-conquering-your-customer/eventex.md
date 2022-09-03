@@ -1,4 +1,6 @@
-### Messages Lib
+# Eventex Notes
+
+## Messages Lib
 
 `messages` é o pacote de mensagens do Django.
 
@@ -14,7 +16,7 @@ do formulário quando existe, através de um context processor.
 
 ---
 
-# Django ORM
+## Django ORM
 
 - `create()` retorna a instancia criada;
 - O `save()` não retorna a instancia criada, retorna None;
@@ -27,7 +29,7 @@ Se for necessário tomar decisões para definir o estado do modelo, o caminho a 
 
 Mais se você já possui os dados que precisa, nesse caso é um bom caminho usar o create diretamente;
 
-## Existem 4 tipos fundamentais no ORM do Django
+### Existem 4 tipos fundamentais no ORM do Django
 
 `s = Subscription(data=data)`
 
@@ -45,14 +47,14 @@ type(Subscription.objects.all()) -> É o motor, o coração do ORM do Django; É
 django.db.models.query.QuerySet
 ```
 
-### Assim é possível separar as responsabilidades
+**Assim é possível separar as responsabilidades**
 
 - Se estiver manipulando com uma linha, está usando a instancia do modelo;
 - Se está descrevendo a tabela, está usando o modelo em si;
 - Se está manipulando o conteúdo da tabela, está no universo do Manager;
 - Se está construindo querys interfaceando com o ORM do Django, está no universo do queryset
 
-## Querysets
+### Querysets
 
 Querysets são preguiçosos, só vão no banco quando se tenta acessar o conteúdo deles; Enquanto isso não acontece, qualquer construção com  `objects()` só retorna uma instância de `QuerySet()`;
 
@@ -72,7 +74,7 @@ Nesse caso, o que ele está fazendo é: `qs.__getitem__(0)` e isso faz o `evalut
 
 Queryset suporta o `slice`; Mas somente para as manipulações que usam `limit` e `offset`;
 
-### Update e delete com querysets
+**Update e delete com querysets**
 
 Estas operações realizam o `evalute` assim que chamadas;
 
@@ -83,7 +85,7 @@ qs.update(cpf='00000000001')
 --> 4 -> retorna a quantidade de elementos atualizados
 ```
 
-### Consultas SQL diretamente(na mão)
+**Consultas SQL diretamente(na mão)**
 
 **raw queryset**
 
@@ -109,3 +111,10 @@ cursor.execute('select name from subscriptions_subscription where email=%s', [he
 cursor.fetchone()
 -->('Atmos Maciel',)
 ```
+
+---
+
+## URL Configuration
+
+URL -> Uniform Resource Locator
+

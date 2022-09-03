@@ -41,6 +41,7 @@
     - [BONUS: Raio X do Django](wttd-training/2-ready-is-when-its-on-the-air/django-x-ray.md)
     - [Visão além do alcançe](wttd-training/2-ready-is-when-its-on-the-air/vision-beyond-reach.md)
 - [X] Desenvolvimento Ágil
+    - [ ] Realizar execução de desafios de plataformas de programção e refazer o `fizzbuzz`;
 - [ ] Conquistando seu Clientes
 - [ ] Trabalhando para não ter trabalho
 - [ ] O Caminho da Autonomia

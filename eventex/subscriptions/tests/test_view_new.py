@@ -1,4 +1,5 @@
 from django.core import mail
+from django.shortcuts import resolve_url
 from django.test import TestCase
 
 from eventex.subscriptions.forms import SubscriptionForm
@@ -9,12 +10,12 @@ Um tipo de abordagem é cada classe representar um cenário de teste,
 ou caso de teste.
 """
 
-SUBSCRIBE_RESOURCE = "/inscricao"
+SUBSCRIPTION_RESOURCE = "subscriptions:new"
 
 
-class SubscribeGet(TestCase):
+class SubscriptionNewGet(TestCase):
     def setUp(self) -> None:
-        self.response = self.client.get(f"{SUBSCRIBE_RESOURCE}/")
+        self.response = self.client.get(resolve_url(SUBSCRIPTION_RESOURCE))
 
     def test_get(self):
         """
@@ -56,7 +57,7 @@ class SubscribeGet(TestCase):
         self.assertIsInstance(form, SubscriptionForm)
 
 
-class SubscribePostValid(TestCase):
+class SubscriptionNewPostValid(TestCase):
     def setUp(self) -> None:
         data = dict(
             name="Some User Name",
@@ -65,7 +66,7 @@ class SubscribePostValid(TestCase):
             phone="12-91234-5678",
         )
 
-        self.response = self.client.post(f"{SUBSCRIBE_RESOURCE}/", data=data)
+        self.response = self.client.post(resolve_url(SUBSCRIPTION_RESOURCE), data=data)
 
     def test_post_action(self):
         self.assertEqual(302, self.response.status_code)
@@ -77,9 +78,9 @@ class SubscribePostValid(TestCase):
         self.assertTrue(Subscription.objects.exists())
 
 
-class SubscribePostInvalid(TestCase):
+class SubscriptionNewPostInvalid(TestCase):
     def setUp(self) -> None:
-        self.response = self.client.post("/inscricao/", {})
+        self.response = self.client.post(resolve_url(SUBSCRIPTION_RESOURCE), {})
 
     def test_should_not_redirect_when_request_post_is_invalid(self):
         self.assertEqual(200, self.response.status_code)
