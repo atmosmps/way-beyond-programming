@@ -1,7 +1,7 @@
 COMMAND = python manage.py
 
 local-server:
-	manage.py runserver 0.0.0.0:3000
+	python manage.py runserver 0.0.0.0:3000
 
 local-setup:
 	pip install -r requirements-dev.txt

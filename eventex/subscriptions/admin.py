@@ -6,14 +6,22 @@ from eventex.subscriptions.models import Subscription
 
 class SubscriptionModelAdmin(admin.ModelAdmin):
     # list_display = quais colunas serão exibidas
-    list_display = ("name", "email", "phone", "cpf", "created_at", "subscribed_today")
+    list_display = (
+        "name",
+        "email",
+        "phone",
+        "cpf",
+        "created_at",
+        "subscribed_today",
+        "paid",
+    )
     date_hierarchy = "created_at"
 
     # search_fields = cria um campo de busca com a prioridade definida na lista
     search_fields = ("name", "email", "phone", "cpf")
 
     # list_filter = permite filtrar a lista facilmente
-    list_filter = ("created_at",)
+    list_filter = ("created_at", "paid")
 
     def subscribed_today(self, obj):
         return obj.created_at == now().date()
