@@ -43,7 +43,14 @@ class SubscriptionModelAdminTest(TestCase):
         self.assertEqual(1, Subscription.objects.filter(paid=True).count())
 
     def test_message_admin(self):
-        """It's should send a message to the user"""
+        """
+        It's should send a message to the user
+
+        Testa o comportamento esperado da action.
+        Testa o comportamento que deve acontecer quando uma funcionalidade for usada pelo usuário.
+        Por isso este é um teste funcional.
+        """
+
         mock = self._call_action()
         mock.assert_called_once_with(
             request=None, message="1 inscriação foi marcada como paga."
