@@ -48,7 +48,8 @@ def create(request):
         )
 
     # the create always return the creted instance # noqa
-    subscription = Subscription.objects.create(**form.cleaned_data)
+    # subscription = Subscription.objects.create(**form.cleaned_data)
+    subscription = form.save()
 
     _send_email(
         template_name="subscriptions/subscription_email.txt",
