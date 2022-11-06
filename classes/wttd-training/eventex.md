@@ -146,3 +146,30 @@ URL -> Uniform Resource Locator
   - Template Nodes
 - Context
 - Loader
+
+---
+
+## Django Forms
+
+- Bounded: conectado a dados(preenchido com dados, contém dados). Somente estes podem ser validados.
+- Unbounded: não conectado com dados(sem dados, vazio)
+
+### Forms Architecture
+
+- Forms: Responsável pelo pipeline de validação;
+- Fields: Valida dados da requisição e os converte para tipos python;
+- Widgets: Expõe os dados como controles html e sabe como obter os dados da requisição para pipeline;
+
+### Validção
+
+**form.is_valid()**
+
+1. Se Form for bounded
+2. Form full_clean()
+3. Para cada field é executado:
+   1. clean() do field;
+      1. to_python
+      2. validators
+   2. método clean_* se esxistir no Form
+4. Form clean()
+5. errors ou cleaned_data
