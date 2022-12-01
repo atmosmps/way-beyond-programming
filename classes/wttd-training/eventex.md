@@ -14,6 +14,9 @@ In `$HOME/.zshrc`, includ the `alias`:
 
 ---
 
+- Django documentation: Built-in template tags and filters
+- The Django template language: for python programmers
+
 # Eventex Notes
 
 ## Messages Lib
@@ -133,6 +136,12 @@ cursor.fetchone()
 ## URL Configuration
 
 URL -> Uniform Resource Locator
+
+- Cool URI’s don't change
+- The User Interface of URL’s
+- URL’s as UI
+- HTTP URL path parameter syntax
+- What Every Developer Should Know About URL’s
 
 ---
 
