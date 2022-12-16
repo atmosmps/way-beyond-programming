@@ -182,3 +182,12 @@ URL -> Uniform Resource Locator
    2. método clean_* se esxistir no Form
 4. Form clean()
 5. errors ou cleaned_data
+
+---
+
+## Load data in Heroku
+
+Não é preciso passar o caminho completo da fixture, pois o `loaddata` vai procurar por fixtures
+dentro de todas as apps instaladas.
+
+`heroku run python manage.py loaddata keynotes.json`
