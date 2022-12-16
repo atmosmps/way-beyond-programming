@@ -3,6 +3,8 @@ from django.test import TestCase
 
 
 class HomeTest(TestCase):
+    fixtures = ["Keynotes.json"]
+
     def setUp(self) -> None:
         self.response = self.client.get(resolve_url("home"))
 
@@ -19,8 +21,10 @@ class HomeTest(TestCase):
     def test_speakers(self):
         """test must be show speakers in home"""
         speakers = [
+            f'href="{resolve_url("speaker_detail", slug="grace-hopper")}"',
             "Grace Hopper",
             "https://hbn.link/hopper-pic",
+            f'href="{resolve_url("speaker_detail", slug="alan-turing")}"',
             "Alan Turing",
             "https://hbn.link/turing-pic",
         ]

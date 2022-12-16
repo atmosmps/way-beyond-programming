@@ -18,6 +18,9 @@ local-check-migrations:
 local-test:
 	$(COMMAND) test
 
+local-test-nomigrations:
+	$(COMMAND) test --nomigrations
+
 local-lint:
 	black --check .
 	isort --check .
@@ -40,6 +43,10 @@ docker-log-app: docker-server
 
 docker-test: docker-server
 	docker-compose exec app $(COMMAND) test
+	make docker-down
+
+docker-test-nomigrations: docker-server
+	docker-compose exec app $(COMMAND) test --nomigrations
 	make docker-down
 
 docker-lint: docker-server
