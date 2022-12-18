@@ -18,3 +18,14 @@ class Speaker(models.Model):
 
     def get_absolute_url(self):
         return resolve_url("speaker_detail", self.slug)
+
+
+class Contact(models.Model):
+    # é melhor usar a definição de um relacionamento definindo o modelo
+    # string, dessa maneira o Django internamente consegue definir qual a
+    # relação interna entre os models, sem a necessidade de ficar realizando
+    # imports entre os módulos, isso é importante principalmente entre modelos
+    # que estão em módulos/apps diferentes pois evita imports circulares.
+    speaker = models.ForeignKey("Speaker", on_delete=models.CASCADE)
+    kind = models.CharField(max_length=1)
+    value = models.CharField(max_length=255)
