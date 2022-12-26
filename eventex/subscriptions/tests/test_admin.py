@@ -1,10 +1,9 @@
-from email import message
 from unittest.mock import Mock
-from urllib import request
 
+from django.contrib import admin
 from django.test import TestCase
 
-from eventex.subscriptions.admin import Subscription, SubscriptionModelAdmin, admin
+from eventex.subscriptions.admin import Subscription, SubscriptionModelAdmin
 
 
 class SubscriptionModelAdminTest(TestCase):
