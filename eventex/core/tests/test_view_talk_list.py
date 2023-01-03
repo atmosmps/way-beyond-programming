@@ -1,9 +1,21 @@
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 
+from eventex.core.models import Talk
+
 
 class TalkListGet(TestCase):
     def setUp(self) -> None:
+        Talk.objects.create(
+            title="Título da Palestra",
+            start="10:00",
+            description="Descrição da palestra",
+        )
+        Talk.objects.create(
+            title="Título da Palestra",
+            start="13:00",
+            description="Descrição da palestra",
+        )
         self.response = self.client.get(r("talk_list"))
 
     def test_get(self):
@@ -13,4 +25,21 @@ class TalkListGet(TestCase):
         self.assertTemplateUsed(self.response, "core/talk_list.html")
 
     def test_html(self):
-        ...
+        contents = [
+            (2, "Título da Palestra"),
+            (1, "10:00"),
+            (1, "13:00"),
+            (2, "/palestrantes/atmos-maciel"),
+            (2, "Atmos Maciel"),
+            (2, "Descrição da palestra"),
+        ]
+        for count, expected in contents:
+            with self.subTest():
+                self.assertContains(self.response, expected, count)
+
+    def test_context(self):
+        context_variables = ["morning_talks", "afternoon_talks"]
+
+        for key in context_variables:
+            with self.subTest():
+                self.assertIn(key, self.response.context)
