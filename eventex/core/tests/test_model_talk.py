@@ -17,9 +17,9 @@ class TalkModelTest(TestCase):
     def test_has_speakers(self):
         """Talk has many Speakers and vice-versa"""
         self.talk.speakers.create(  # related manager
-            name='Atmos Maciel',
-            slug='atmos-maciel',
-            website='https://atmosmps.me',
+            name="Atmos Maciel",
+            slug="atmos-maciel",
+            website="https://atmosmps.me",
         )
 
         self.assertEqual(1, self.talk.speakers.count())

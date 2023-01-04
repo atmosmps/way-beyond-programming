@@ -1,8 +1,7 @@
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 
-from eventex.core.models import Speaker
-from eventex.core.models import Talk
+from eventex.core.models import Speaker, Talk
 
 
 class TalkListGet(TestCase):
@@ -19,9 +18,9 @@ class TalkListGet(TestCase):
         )
 
         speaker = Speaker.objects.create(
-            name='Atmos Maciel',
-            slug='atmos-maciel',
-            website='https://atmosmps.me',
+            name="Atmos Maciel",
+            slug="atmos-maciel",
+            website="https://atmosmps.me",
         )
 
         t1.speakers.add(speaker)
