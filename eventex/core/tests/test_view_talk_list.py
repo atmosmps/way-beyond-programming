@@ -1,21 +1,32 @@
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 
+from eventex.core.models import Speaker
 from eventex.core.models import Talk
 
 
 class TalkListGet(TestCase):
     def setUp(self) -> None:
-        Talk.objects.create(
+        t1 = Talk.objects.create(
             title="Título da Palestra",
             start="10:00",
             description="Descrição da palestra",
         )
-        Talk.objects.create(
+        t2 = Talk.objects.create(
             title="Título da Palestra",
             start="13:00",
             description="Descrição da palestra",
         )
+
+        speaker = Speaker.objects.create(
+            name='Atmos Maciel',
+            slug='atmos-maciel',
+            website='https://atmosmps.me',
+        )
+
+        t1.speakers.add(speaker)
+        t2.speakers.add(speaker)
+
         self.response = self.client.get(r("talk_list"))
 
     def test_get(self):

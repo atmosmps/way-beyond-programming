@@ -50,3 +50,4 @@ class Talk(models.Model):
     title = models.CharField(max_length=200)
     start = models.TimeField()
     description = models.TextField()
+    speakers = models.ManyToManyField("Speaker")
