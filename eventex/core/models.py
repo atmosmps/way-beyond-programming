@@ -1,6 +1,8 @@
 from django.db import models
 from django.shortcuts import resolve_url
 
+from eventex.core.managers import KindContactQuerySet, TalkPeriodManager
+
 
 class Speaker(models.Model):
     name = models.CharField(verbose_name="nome", max_length=255)
@@ -38,6 +40,8 @@ class Contact(models.Model):
     kind = models.CharField(verbose_name="tipo", max_length=1, choices=KINDS)
     value = models.CharField(verbose_name="valor", max_length=255)
 
+    objects = KindContactQuerySet.as_manager()
+
     class Meta:
         verbose_name = "Contato"
         verbose_name_plural = "Contatos"
@@ -53,6 +57,8 @@ class Talk(models.Model):
     speakers = models.ManyToManyField(
         "Speaker", verbose_name="palestrantes", blank=True
     )
+
+    objects = TalkPeriodManager()
 
     class Meta:
         verbose_name = "Palestra"

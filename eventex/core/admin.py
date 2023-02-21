@@ -24,7 +24,16 @@ class SpeakerModelAdmin(admin.ModelAdmin):
     def photo_img(self, obj):
         return format_html('<img width="32px" src="{}"/>', obj.photo)
 
+    photo_img.allow_tags = True
     photo_img.short_description = "foto"
+
+    def email(self, obj):
+        return obj.contact_set.emails().first()
+        # return obj.contact_set(manager='emails').first()
+
+    def phone(self, obj):
+        return obj.contact_set.phones().first()
+        # return obj.contact_set(manager='phones').first()
 
 
 admin.site.register(Speaker, SpeakerModelAdmin)

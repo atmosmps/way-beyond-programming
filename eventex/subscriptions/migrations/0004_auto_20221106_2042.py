@@ -6,7 +6,6 @@ import eventex.subscriptions.validators
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("subscriptions", "0003_subscription_paid"),
     ]
