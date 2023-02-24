@@ -1,7 +1,7 @@
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
 
-from eventex.core.models import Speaker, Talk
+from eventex.core.models import Course, Speaker, Talk
 
 
 class TalkListGet(TestCase):
@@ -17,6 +17,13 @@ class TalkListGet(TestCase):
             description="Descrição da palestra",
         )
 
+        c1 = Course.objects.create(
+            title="Título do curso",
+            start="09:00",
+            description="Descrição do curso.",
+            slots=20,
+        )
+
         speaker = Speaker.objects.create(
             name="Some Name",
             slug="some-name",
@@ -25,6 +32,7 @@ class TalkListGet(TestCase):
 
         t1.speakers.add(speaker)
         t2.speakers.add(speaker)
+        c1.speakers.add(speaker)
 
         self.response = self.client.get(r("talk_list"))
 

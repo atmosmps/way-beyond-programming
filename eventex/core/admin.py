@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from eventex.core.models import Contact, Speaker, Talk, Course
+from eventex.core.models import Contact, Course, Speaker, Talk
 
 
 class ContactInline(admin.TabularInline):
