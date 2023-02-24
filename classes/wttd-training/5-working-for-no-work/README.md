@@ -16,3 +16,5 @@ Para concertar o problema, precisamos
 
 - *t5* modelo `Talk` com `start` null=True e `blank=True`
 - *t6* criar e aplicar a migração 0006 para **alinhar** django e banco
+
+# Django Managers Topics

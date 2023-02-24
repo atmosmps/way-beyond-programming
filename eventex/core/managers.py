@@ -36,7 +36,7 @@ class KindContactQuerySet(QuerySet):
 #         # return self.filter(kind=self.model.PHONE)
 
 
-class TalkPeriodManager(Manager):
+class PeriodManager(Manager):
     MIDDAY = "12:00"
 
     def at_morning(self):

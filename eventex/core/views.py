@@ -15,10 +15,20 @@ def speaker_detail(request, slug):
 
 
 def talk_list(request):
+    speaker = Speaker(name="Some Name", slug="some-name")
+    courses = [
+        dict(
+            title="Título do curso",
+            start="09:00",
+            description="Descrição do curso.",
+            speakers={"all": [speaker]},
+        )
+    ]
     context = {
         "morning_talks": Talk.objects.at_morning(),
         # "morning_talks": Talk.objects.filter(start__lt="12:00"), # less than
         "afternoon_talks": Talk.objects.at_afternoon(),
-        # "afternoon_talks": Talk.objects.filter(start__gte="12:00"), # grater than or equal # noqa
+        # "afternoon_talks": Talk.objects.filter(start__gte="12:00"), # grater than or equal # noqa,
+        "courses": courses,
     }
     return render(request, "core/talk_list.html", context)

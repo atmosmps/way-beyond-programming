@@ -18,9 +18,9 @@ class TalkListGet(TestCase):
         )
 
         speaker = Speaker.objects.create(
-            name="Atmos Maciel",
-            slug="atmos-maciel",
-            website="https://atmosmps.me",
+            name="Some Name",
+            slug="some-name",
+            website="https://website.net",
         )
 
         t1.speakers.add(speaker)
@@ -39,16 +39,19 @@ class TalkListGet(TestCase):
             (2, "Título da Palestra"),
             (1, "10:00"),
             (1, "13:00"),
-            (2, "/palestrantes/atmos-maciel"),
-            (2, "Atmos Maciel"),
+            (3, "/palestrantes/some-name"),
+            (3, "Some Name"),
             (2, "Descrição da palestra"),
+            (1, "Título do curso"),
+            (1, "09:00"),
+            (1, "Descrição do curso."),
         ]
         for count, expected in contents:
             with self.subTest():
                 self.assertContains(self.response, expected, count)
 
     def test_context(self):
-        context_variables = ["morning_talks", "afternoon_talks"]
+        context_variables = ["morning_talks", "afternoon_talks", "courses"]
 
         for key in context_variables:
             with self.subTest():

@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from eventex.core.managers import TalkPeriodManager
-from eventex.core.models import Talk
+from eventex.core.managers import PeriodManager
+from eventex.core.models import Talk, Course
 
 
 class TalkModelTest(TestCase):
@@ -14,9 +14,9 @@ class TalkModelTest(TestCase):
     def test_has_speakers(self):
         """Talk has many Speakers and vice-versa"""
         self.talk.speakers.create(  # related manager
-            name="Atmos Maciel",
-            slug="atmos-maciel",
-            website="https://atmosmps.me",
+            name="Some Name",
+            slug="some-name",
+            website="https://website.net",
         )
 
         self.assertEqual(1, self.talk.speakers.count())
@@ -41,13 +41,13 @@ class TalkModelTest(TestCase):
         self.assertEqual("Título da Palestra", str(self.talk))
 
 
-class TalkPeriodManagerTest(TestCase):
+class PeriodManagerTest(TestCase):
     def setUp(self) -> None:
         Talk.objects.create(title="Morning Talk", start="11:59")
         Talk.objects.create(title="Afternon Talk", start="12:00")
 
     def test_manager(self):
-        self.assertIsInstance(Talk.objects, TalkPeriodManager)
+        self.assertIsInstance(Talk.objects, PeriodManager)
 
     def test_at_morning(self):
         qs = Talk.objects.at_morning()
@@ -58,3 +58,32 @@ class TalkPeriodManagerTest(TestCase):
         qs = Talk.objects.at_afternoon()
         expected = ["Afternon Talk"]
         self.assertQuerysetEqual(qs, expected, lambda o: o.title)
+
+
+class CourseModelTest(TestCase):
+    def setUp(self) -> None:
+        self.course = Course.objects.create(
+            title="Título do curso",
+            start="09:00",
+            description="Descrição do curso",
+            slots=20,
+        )
+
+    def test_create(self):
+        self.assertTrue(Course.objects.exists())
+
+    def test_speaker(self):
+        """Course has many speakers and vice-versa"""
+        self.course.speakers.create(  # related manager
+            name="Some Name",
+            slug="some-name",
+            website="https://website.net",
+        )
+
+        self.assertEqual(1, self.course.speakers.count())
+
+    def test_str(self):
+        self.assertEqual("Título do curso", str(self.course))
+
+    def test_manager(self):
+        self.assertIsInstance(Course.objects, PeriodManager)
