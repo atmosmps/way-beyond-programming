@@ -62,6 +62,7 @@ class Activity(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['start']
         verbose_name = "Palestra"
         verbose_name_plural = "Palestras"
 
@@ -73,7 +74,16 @@ class Talk(Activity):
     pass
 
 
-class Course(Activity):
+# # DEPRECATED
+# class CourseOld(Activity):
+#     slots = models.IntegerField()
+#
+#     class Meta:
+#         verbose_name = "Curso"
+#         verbose_name_plural = "Cursos"
+
+
+class Course(Talk):
     slots = models.IntegerField()
 
     class Meta:
