@@ -4,18 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0007_auto_20230224_1701'),
+        ("core", "0007_auto_20230224_1701"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Course',
-            new_name='CourseOld',
+            old_name="Course",
+            new_name="CourseOld",
         ),
         migrations.AlterModelOptions(
-            name='courseold',
-            options={'verbose_name': 'Curso', 'verbose_name_plural': 'Cursos'},
+            name="courseold",
+            options={"verbose_name": "Curso", "verbose_name_plural": "Cursos"},
         ),
     ]

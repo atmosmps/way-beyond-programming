@@ -24,8 +24,8 @@ def forward_course_abc_to_mti(apps, schema_editor):
     4. Deletar o ABC.
     """
     copy_src_to_dst(
-        source=apps.get_model('core', 'CourseOld'),
-        destination=apps.get_model('core', 'Course')
+        source=apps.get_model("core", "CourseOld"),
+        destination=apps.get_model("core", "Course"),
     )
 
 
@@ -34,19 +34,16 @@ def backward_course_abc_to_mti(apps, schema_editor):
     Faz o caminho inverso da função forward_course_abc_to_mti()
     """
     copy_src_to_dst(
-        source=apps.get_model('core', 'Course'),
-        destination=apps.get_model('core', 'CourseOld')
+        source=apps.get_model("core", "Course"),
+        destination=apps.get_model("core", "CourseOld"),
     )
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0009_course'),
+        ("core", "0009_course"),
     ]
 
     operations = [
-        migrations.RunPython(
-            forward_course_abc_to_mti, backward_course_abc_to_mti
-        )
+        migrations.RunPython(forward_course_abc_to_mti, backward_course_abc_to_mti)
     ]
