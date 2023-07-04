@@ -3,7 +3,7 @@ from uuid import uuid4
 from django.conf import settings
 from django.core import mail
 from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import render, resolve_url
+from django.shortcuts import get_object_or_404, render, resolve_url
 from django.template.loader import render_to_string
 
 from eventex.subscriptions.forms import SubscriptionForm
@@ -62,17 +62,26 @@ def create(request):
     return HttpResponseRedirect(resolve_url("subscriptions:detail", subscription.uuid))
 
 
-def detail(request, uuid):
-    try:
-        subscription = Subscription.objects.get(uuid=uuid)
+# def detail(request, uuid):
+#     try:
+#         subscription = Subscription.objects.get(uuid=uuid)
+#
+#         return render(
+#             request=request,
+#             template_name="subscriptions/subscription_detail.html",
+#             context={"subscription": subscription},
+#         )
+#     except Subscription.DoesNotExist:
+#         raise Http404
 
-        return render(
-            request=request,
-            template_name="subscriptions/subscription_detail.html",
-            context={"subscription": subscription},
-        )
-    except Subscription.DoesNotExist:
-        raise Http404
+
+def detail(request, uuid):
+    subscription = get_object_or_404(Subscription, uuid=uuid)
+    return render(
+        request=request,
+        template_name="subscriptions/subscription_detail.html",
+        context={"subscription": subscription},
+    )
 
 
 def _send_email(subject, from_, to, template_name, context):
