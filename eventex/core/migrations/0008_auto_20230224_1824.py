@@ -4,6 +4,8 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
+    atomic = False  # informa ao backend od SQLite do Django que esta operação
+    # não deve ocorre numa única transação.
     dependencies = [
         ("core", "0007_auto_20230224_1701"),
     ]

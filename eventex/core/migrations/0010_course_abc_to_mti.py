@@ -2,6 +2,10 @@
 
 from django.db import migrations
 
+# Migration ABC(Abstract Class) to MTI(Multi Table Inheritance)
+# Command used to generate this migration:
+# python manage.py makemigrations --empty -n <migration-name> core
+
 
 def copy_src_to_dst(source, destination):
     for src in source.objects.all():

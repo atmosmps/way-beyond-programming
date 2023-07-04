@@ -33,7 +33,7 @@ class Contact(models.Model):
     # string, dessa maneira o Django internamente consegue definir qual a
     # relação interna entre os models, sem a necessidade de ficar realizando
     # imports entre os módulos, isso é importante principalmente entre modelos
-    # que estão em módulos/apps diferentes pois evita imports circulares.
+    # que estão em módulos/apps diferentes, pois evita imports circulares.
     speaker = models.ForeignKey(
         "Speaker", on_delete=models.CASCADE, verbose_name="palestrante"
     )

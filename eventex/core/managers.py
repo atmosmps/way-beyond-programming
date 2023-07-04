@@ -23,6 +23,7 @@ class KindContactQuerySet(QuerySet):
         return self.filter(kind=self.model.PHONE)
 
 
+# DEADCODE
 # class KindContactManager(Manager):
 #     def get_queryset(self):
 #         return KindContactQuerySet(self.model, using=self._db)

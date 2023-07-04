@@ -41,6 +41,7 @@ class TalkModelTest(TestCase):
         self.assertEqual("Título da Palestra", str(self.talk))
 
     def test_ordering(self):
+        """Regression Test"""
         self.assertListEqual(["start"], Talk._meta.ordering)
 
 
@@ -92,4 +93,5 @@ class CourseModelTest(TestCase):
         self.assertIsInstance(Course.objects, PeriodManager)
 
     def test_ordering(self):
+        """Regression Test"""
         self.assertListEqual(["start"], Course._meta.ordering)

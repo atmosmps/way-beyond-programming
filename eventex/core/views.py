@@ -15,6 +15,7 @@ def speaker_detail(request, slug):
 
 
 def talk_list(request):
+    # DEADCODE
     # context = {
     #     "morning_talks": Talk.objects.at_morning(),
     #     # "morning_talks": Talk.objects.filter(start__lt="12:00"), # less than # noqa

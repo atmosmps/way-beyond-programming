@@ -52,5 +52,5 @@ class SubscriptionModelAdminTest(TestCase):
 
         mock = self._call_action()
         mock.assert_called_once_with(
-            request=None, message="1 inscriação foi marcada como paga."
+            request=None, message="1 inscrição foi marcada como paga."
         )

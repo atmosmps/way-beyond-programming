@@ -1,60 +1,60 @@
 COMMAND = python manage.py
 
-local-server:
+run:
 	$(COMMAND) runserver 0.0.0.0:3000
 
-local-setup:
+setup-dev:
 	pip install -r requirements-dev.txt
 
-local-migrations:
+migrations:
 	$(COMMAND) makemigrations
 
-local-migrate:
+migrate:
 	$(COMMAND) migrate
 
-local-check-migrations:
+check-migrations:
 	$(COMMAND) check-migrations
 
-local-test:
+test:
 	$(COMMAND) test
 
-local-test-nomigrations:
+test-nomigrations:
 	$(COMMAND) test --nomigrations
 
-local-lint:
+lint:
 	black --check .
 	isort --check .
 
-local-lint-fix:
+lint-fix:
 	black .
 	isort .
 
-docker-server:
-	docker-compose up -d --build
+up:
+	docker compose up -d --build
 
-docker-server-attached:
-	docker-compose up --build
+up-attached:
+	docker compose up --build
 
-docker-down:
-	docker-compose down -v
+down:
+	docker compose down -v
 
-docker-log-app: docker-server
-	docker-compose logs app
+clog-app: up
+	docker compose logs app
 
-docker-test: docker-server
-	docker-compose exec app $(COMMAND) test
-	make docker-down
+ctest: up
+	docker compose exec app $(COMMAND) test
+	make down
 
-docker-test-nomigrations: docker-server
-	docker-compose exec app $(COMMAND) test --nomigrations
-	make docker-down
+ctest-nomigrations: up
+	docker compose exec app $(COMMAND) test --nomigrations
+	make down
 
-docker-lint: docker-server
-	docker-compose exec app black --check .
-	docker-compose exec app isort --check .
-	make docker-down
+clint: up
+	docker compose exec app black --check .
+	docker compose exec app isort --check .
+	make down
 
-docker-lint-fix: docker-server
-	docker-compose exec app black .
-	docker-compose exec app isort .
-	make docker-down
+clint-fix: up
+	docker compose exec app black .
+	docker compose exec app isort .
+	make down
