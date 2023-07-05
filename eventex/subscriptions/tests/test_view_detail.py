@@ -12,7 +12,7 @@ class SubscriptionDetailGet(TestCase):
             email="some@email.com",
             phone="12-91234-5678",
         )
-        self.resp = self.client.get(resolve_url("subscriptions:detail", self.obj.uuid))
+        self.resp = self.client.get(resolve_url("subscriptions:detail", self.obj.pk))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
@@ -36,7 +36,7 @@ class SubscriptionDetailNotFound(TestCase):
         resp = self.client.get(
             resolve_url(
                 "subscriptions:detail",
-                "695837ef-4218-4106-82b1-af4b1acc9970",
+                "0",
             )
         )
         self.assertEqual(404, resp.status_code)
