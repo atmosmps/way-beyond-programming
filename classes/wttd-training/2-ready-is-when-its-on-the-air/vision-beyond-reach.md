@@ -9,7 +9,7 @@
 
 - Foco no negócio do cliente
     - a pergunta chave pro cliente é: qual é o seu problema?
-    - o que é que você não tem hoje e o que você está impedido de fazer poque você não tem a tecnologia disponível hoje?
+    - o que você não tem hoje e o que você está impedido de fazer poque você não tem a tecnologia disponível hoje?
 
 - Prazo o cliente define. Qualidade é intríseca ao seu trabalho. Escopo é negociável.
 

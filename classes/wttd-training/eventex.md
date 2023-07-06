@@ -27,7 +27,7 @@ Essa mensagem deve ser exibida no Template do Formulário e lá deve
 ser configurada também.
 
 O Django já adiciona as messages automaticamente no contexto
-do formulário quando existe, através de um context processor.
+do formulário quando existe, por um context processor.
 
 **Success Feedback**
 
@@ -37,8 +37,8 @@ do formulário quando existe, através de um context processor.
 
 ## Django ORM
 
-- `create()` retorna a instancia criada;
-- O `save()` não retorna a instancia criada, retorna None;
+- `create()` retorna a instância criada;
+- O `save()` não retorna a instância criada, retorna None;
 - `bulk_create()` -> permite persistir vários objetos de uma única vez, passando uma lista de instâncias para o objeto alvo;
 - Quando um Objeto do model é criado em memória o ID é None, pois ainda não está salvo no Banco. Quando o save é chamado, ele verifica se o ID é NOne, se for ele salva, se não for, ele atualiza. Por isso, se eu tiver um objeto existente no banco e atualizar oID para None, na próxima instância ele irá criar um novo Objeto;
 - Quando estamos manipulando os models, somente no momento do `save()` os dados são persistidos;
@@ -68,24 +68,26 @@ django.db.models.query.QuerySet
 
 **Assim é possível separar as responsabilidades**
 
-- Se estiver manipulando com uma linha, está usando a instancia do modelo;
+- Se estiver manipulando com uma linha, está usando a instância do modelo;
 - Se está descrevendo a tabela, está usando o modelo em si;
 - Se está manipulando o conteúdo da tabela, está no universo do Manager;
 - Se está construindo querys interfaceando com o ORM do Django, está no universo do queryset
 
 ### Querysets
 
-Querysets são preguiçosos, só vão no banco quando se tenta acessar o conteúdo deles; Enquanto isso não acontece, qualquer construção com  `objects()` só retorna uma instância de `QuerySet()`;
+Querysets são preguiçosos, só vão ao banco quando se tenta acessar o conteúdo deles; Enquanto isso não acontece, qualquer construção com  `objects()` só retorna uma instância de `QuerySet()`;
 
 Objeto Queryset que referencia um select * from em Subscription, esse objeto está em memória e não foi executado no banco ainda:
 
 `qs = Subscription.objects.all()`
 
-Quando fazemos `print(qs)` isso vai chamar o `__repr__` do Model que vai forçar a avaliação(`evaluate`) do queryset, que vai fazer com que a query seja feita no banco de dados para mostrar o conteúdo do banco;
+Quando fazemos `print(qs)` isso vai chamar o `__repr__` do Model que vai forçar a avaliação(`evaluate`) do queryset,
+que vai fazer com que a query seja feita no banco de dados para mostrar o conteúdo do banco;
 
-O queryset faz cache dos dados, uma vez que ele faz o `fetch` dos dados dos banco, ele usa esse cache para trabalhar com dados que foram retornados na primeira consulta do objeto;
+O queryset faz cache dos dados, uma vez que ele faz o `fetch` dos dados dos bancos, ele usa esse cache para trabalhar
+com dados retornados na primeira consulta do objeto;
 
-Existem casos aonde o Django realiza a consulta no Banco sem usar o cache, como por exemplo:
+Existem casos aonde o Django realiza a consulta no Banco sem usar o cache, como, por exemplo:
 
 `qs[0]`
 

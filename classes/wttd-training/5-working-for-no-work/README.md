@@ -12,7 +12,7 @@ pode ser nulo, porém no Django está definido que o código pode tentar salvar 
 - *t3* modelo `Talk` com `start` `null=False`, mas `blank=True`
 - *t4* *IntegrityError* ao tentar salvar o `Talk` com `start` **vazio**
 
-Para concertar o problema, precisamos
+Para consertar o problema, precisamos
 
 - *t5* modelo `Talk` com `start` null=True e `blank=True`
 - *t6* criar e aplicar a migração 0006 para **alinhar** django e banco
