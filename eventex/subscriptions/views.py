@@ -1,11 +1,11 @@
-from uuid import uuid4
-
 from django.conf import settings
 from django.core import mail
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, resolve_url
 from django.template.loader import render_to_string
+from django.views import View
 from django.views.generic import DetailView
+from django.views.generic.base import TemplateResponseMixin
+from django.views.generic.edit import FormMixin
 
 from eventex.subscriptions.forms import SubscriptionForm
 from eventex.subscriptions.models import Subscription
@@ -26,48 +26,46 @@ def _send_email(subject, from_, to, template_name, context):
     )
 
 
-def new(request):
-    if request.method == "POST":
-        return create(request)
+class SubscriptionCreate(TemplateResponseMixin, View):
+    template_name = "subscriptions/subscription_form.html"
+    form_class = SubscriptionForm
 
-    return empty_form(request)
+    def get_form(self):
+        if self.request.method == "POST":
+            return self.form_class(self.request.POST)
+        return self.form_class()
 
+    def get_context_data(self, **kwargs):
+        context = dict(kwargs)
+        context.setdefault("form", self.get_form())
+        return context
 
-def empty_form(request):
-    """
-    Envia uma instância de SubscriptionForm para o context do formulário.
-    context = contexto usado para renderizar uma resposta, ele é dict like.
-    """
-    return render(
-        request,
-        "subscriptions/subscription_form.html",
-        context={"form": SubscriptionForm()},
-    )
+    def form_invalid(self, form):
+        return self.render_to_response(context=self.get_context_data(form=form))
 
+    def form_valid(self, form):
+        subscription = form.save()
 
-def create(request):
-    form = SubscriptionForm(request.POST)
-    form.cleaned_data = {"uuid": uuid4}
-
-    if not form.is_valid():
-        """Abort Return"""
-        return render(
-            request, "subscriptions/subscription_form.html", context={"form": form}
+        _send_email(
+            template_name="subscriptions/subscription_email.txt",
+            context={"subscription": subscription},
+            subject="Confirmação de Inscrição",
+            from_=settings.DEFAULT_FROM_EMAIL,
+            to=subscription.email,
         )
 
-    # the create always return the creted instance # noqa
-    # subscription = Subscription.objects.create(**form.cleaned_data)
-    subscription = form.save()
+        return HttpResponseRedirect(subscription.get_absolute_url())
 
-    _send_email(
-        template_name="subscriptions/subscription_email.txt",
-        context={"subscription": subscription},
-        subject="Confirmação de Inscrição",
-        from_=settings.DEFAULT_FROM_EMAIL,
-        to=subscription.email,
-    )
+    def get(self, *args, **kwargs):
+        return self.render_to_response(context=self.get_context_data())
 
-    return HttpResponseRedirect(resolve_url("subscriptions:detail", subscription.uuid))
+    def post(self, *args, **kwargs):
+        form = self.get_form()
+
+        if not form.is_valid():
+            return self.form_invalid(form)
+        return self.form_valid(form)
 
 
+new = SubscriptionCreate.as_view()
 detail = DetailView.as_view(model=Subscription)
