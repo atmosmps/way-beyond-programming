@@ -1,4 +1,4 @@
-# Way beyond programming
+# Way Beyond Programming
 
 ## [Eventex](eventex/README.md)
 
