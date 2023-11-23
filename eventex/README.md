@@ -39,3 +39,7 @@ heroku config:set DEBUG=False
 # configurar email
 git push heroku master --force
 ```
+
+## Estrutura dos Models
+
+[Models Strucuture](../models-structure.png)
